@@ -60,11 +60,6 @@ func (v regionValidator) ValidateResource(ctx context.Context, request resource.
 	}
 
 	if zoneTier.ValueString() == "Edge" {
-		if region.ValueString() != "DE" {
-			response.Diagnostics.AddAttributeError(regionAttr, "Invalid region attribute", "Storage zones in the Edge tier must have \"DE\" as the main region.")
-			return
-		}
-
 		for _, item := range replicationRegionsElements {
 			if slices.Contains(edgeRegions, item) {
 				continue
